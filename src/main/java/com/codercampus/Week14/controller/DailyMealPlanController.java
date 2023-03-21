@@ -18,12 +18,12 @@ public class DailyMealPlanController {
 
 	@GetMapping("/mealplanner/3meals")
 	public ResponseEntity<DayResponse> getThreeMealsPlan(@RequestParam(name = "numCalories") int numCalories,
-	        @RequestParam(name = "diet", required = false) String diet,
-	        @RequestParam(name = "exclusions", required = false) String exclusions) {
+			@RequestParam(name = "diet", required = false) String diet,
+			@RequestParam(name = "exclusions", required = false) String exclusions) {
 
-	    String mealPlanJson = spoonacularService.generateMealPlan(numCalories, diet, exclusions, "day");
-	    DayResponse dayResponse = new Gson().fromJson(mealPlanJson, DayResponse.class);
+		String mealPlanJson = spoonacularService.generateMealPlan(numCalories, diet, exclusions, "day");
+		DayResponse dayResponse = new Gson().fromJson(mealPlanJson, DayResponse.class);
 
-	    return ResponseEntity.ok(dayResponse);
+		return ResponseEntity.ok(dayResponse);
 	}
 }

@@ -1,25 +1,18 @@
 package com.codercampus.Week14.service;
 
 public class Meal {
-
-	private int id;
-	private String imageType;
+	private Integer id;
 	private String title;
+	private Integer readyInMinutes;
+	private Integer servings;
+	private String imageType;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getImageType() {
-		return imageType;
-	}
-
-	public void setImageType(String imageType) {
-		this.imageType = imageType;
 	}
 
 	public String getTitle() {
@@ -30,4 +23,27 @@ public class Meal {
 		this.title = title;
 	}
 
+	public Integer getReadyInMinutes() {
+		return readyInMinutes;
+	}
+
+	public void setReadyInMinutes(Integer readyInMinutes) {
+		this.readyInMinutes = readyInMinutes;
+	}
+
+	public Integer getServings() {
+		return servings;
+	}
+
+	public void setServings(Integer servings) {
+		this.servings = servings;
+	}
+
+	public String getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
+	}
 }
