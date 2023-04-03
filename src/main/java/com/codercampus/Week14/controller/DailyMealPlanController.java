@@ -2,6 +2,7 @@ package com.codercampus.Week14.controller;
 
 import com.codercampus.Week14.service.DayResponse;
 import com.codercampus.Week14.service.SpoonacularService;
+import com.codercampus.Week14.service.WeekResponse;
 import com.google.gson.Gson;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,23 @@ public class DailyMealPlanController {
 	private SpoonacularService spoonacularService;
 
 	@GetMapping("/mealplanner/3meals")
-	public ResponseEntity<DayResponse> getThreeMealsPlan(@RequestParam(name = "numCalories") int numCalories,
-			@RequestParam(name = "diet", required = false) String diet,
-			@RequestParam(name = "exclusions", required = false) String exclusions) {
+	public ResponseEntity<DayResponse> getThreeMealsWeekPlan(
+            @RequestParam(name = "numCalories", required = false) Integer numCalories,
+            @RequestParam(name = "diet", required = false) String diet,
+            @RequestParam(name = "exclusions", required = false) String exclusions) {
 
-		String mealPlanJson = spoonacularService.generateMealPlan(numCalories, diet, exclusions, "day");
+        int calories = 0; // Default value if numCalories is null
+
+        if (numCalories != null) {
+            calories = numCalories.intValue();
+        }
+
+        String mealPlanJson = spoonacularService.generateMealPlan(
+                calories,
+                diet,
+                exclusions,
+                "day"
+        );
 		DayResponse dayResponse = new Gson().fromJson(mealPlanJson, DayResponse.class);
 
 		return ResponseEntity.ok(dayResponse);

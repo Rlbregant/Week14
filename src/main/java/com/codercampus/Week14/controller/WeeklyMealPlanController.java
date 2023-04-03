@@ -16,11 +16,23 @@ public class WeeklyMealPlanController {
     private SpoonacularService spoonacularService;
 
     @GetMapping("/mealplanner/3meals/week")
-    public ResponseEntity<WeekResponse> getThreeMealsWeekPlan(@RequestParam(name = "numCalories") int numCalories,
+    public ResponseEntity<WeekResponse> getThreeMealsWeekPlan(
+            @RequestParam(name = "numCalories", required = false) Integer numCalories,
             @RequestParam(name = "diet", required = false) String diet,
             @RequestParam(name = "exclusions", required = false) String exclusions) {
 
-        String mealPlanJson = spoonacularService.generateMealPlan(numCalories, diet, exclusions, "week");
+        int calories = 0; // Default value if numCalories is null
+
+        if (numCalories != null) {
+            calories = numCalories.intValue();
+        }
+
+        String mealPlanJson = spoonacularService.generateMealPlan(
+                calories,
+                diet,
+                exclusions,
+                "week"
+        );
         WeekResponse weekResponse = new Gson().fromJson(mealPlanJson, WeekResponse.class);
 
         return ResponseEntity.ok(weekResponse);
